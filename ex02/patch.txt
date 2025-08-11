@@ -1,0 +1,17 @@
+Date: Monday, 11 Aug of 2025 at 12:09:00
+Subject: {PATCH} Adding "-thor_kernel" to EXTRAVERSION
+Signed-off by: rcortes-b <raulcortes.dev@gmail>
+
+---
+
+--- a/Makefile	2025-08-11 11:43:54.193000000 +0200
++++ b/Makefile	2025-08-11 11:42:49.774247875 +0200
+@@ -2,7 +2,7 @@
+ VERSION = 6
+ PATCHLEVEL = 16
+ SUBLEVEL = 0
+-EXTRAVERSION =
++EXTRAVERSION = -thor_kernel
+ NAME = Baby Opossum Posse
+ 
+ # *DOCUMENTATION*
