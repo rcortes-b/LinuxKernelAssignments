@@ -1,0 +1,3 @@
+
+ACTION=="add", SUBSYSTEM=="usb", ATTRS{bInterfaceClass}=="03", ATTRS{bInterfaceSubClass}=="01", ATTRS{bInterfaceProtocol}=="01", RUN+="/usr/sbin/insmod /home/LinuxKernelAssignments/ex04/basic/kb_hotplug.ko"
+
