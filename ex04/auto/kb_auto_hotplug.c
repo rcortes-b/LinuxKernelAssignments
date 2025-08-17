@@ -22,7 +22,6 @@ MODULE_DEVICE_TABLE(usb, usb_keyboard_id);
 static int kb_connect(struct usb_interface *intf, const struct usb_device_id *id)
 {
 	pr_info("Keyboard connected\n");
-	printk(KERN_ALERT "Keyboard connected\n");
 	return 0;
 }
 
@@ -40,10 +39,8 @@ static struct usb_driver kb_driver = {
 
 static int __init kb_init(void)
 {
-	printk(KERN_ALERT "HOLA, IS THIS WORKING?\n");
 	int result = usb_register(&kb_driver);
 	if (result < 0) {
-		printk(KERN_ALERT "usb reg failed\n");
 		pr_err("usb_register failed\n");
 		return -1;
 	}

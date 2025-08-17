@@ -1,0 +1,10 @@
+Aug 17 16:29:38 rcortes- kernel: usb 1-2: Product: USB Keyboard
+Aug 17 16:29:38 rcortes- kernel: usb 1-2: Manufacturer:  
+Aug 17 16:29:38 rcortes- kernel: input:   USB Keyboard as /devices/pci0000:00/0000:00:06.0/usb1/1-2/1-2:1.0/0003:04D9:1702.0006/input/input13
+Aug 17 16:29:38 rcortes- kernel: hid-generic 0003:04D9:1702.0006: input,hidraw1: USB HID v1.10 Keyboard [  USB Keyboard] on usb-0000:00:06.0-2/input0
+Aug 17 16:29:38 rcortes- kernel: input:   USB Keyboard System Control as /devices/pci0000:00/0000:00:06.0/usb1/1-2/1-2:1.1/0003:04D9:1702.0007/input/input14
+Aug 17 16:29:39 rcortes- kernel: input:   USB Keyboard Consumer Control as /devices/pci0000:00/0000:00:06.0/usb1/1-2/1-2:1.1/0003:04D9:1702.0007/input/input15
+Aug 17 16:29:39 rcortes- kernel: hid-generic 0003:04D9:1702.0007: input,hidraw2: USB HID v1.10 Device [  USB Keyboard] on usb-0000:00:06.0-2/input1
+Aug 17 16:45:57 rcortes- kernel: usbcore: deregistering interface driver usbhid
+Aug 17 16:45:57 rcortes- kernel: Module clean uppppppp!
+Aug 17 16:47:18 rcortes- kernel: Keyboard has been connected!

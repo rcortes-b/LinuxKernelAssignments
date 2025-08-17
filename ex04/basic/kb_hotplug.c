@@ -11,13 +11,13 @@ MODULE_VERSION("0.01");
 
 static int __init kb_init(void)
 {
-	printk(KERN_INFO "Keyboard has been connecteddddd!\n");
+	pr_info("Keyboard has been connected!\n");
 	return 0;
 }
 
 static void __exit kb_exit(void)
 {
-	printk(KERN_INFO "Module clean uppppppp!\n");
+	pr_info("Module clean up!\n");
 }
 
 module_init(kb_init);
