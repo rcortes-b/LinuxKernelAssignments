@@ -1,0 +1,14 @@
+[13287.897480] misc device: Registering the miscellaneous device.
+[13308.781742] misc device: write operation has been called.
+[13308.781747] misc device: Invalid value
+[13312.895947] misc device: write operation has been called.
+[13328.331146] misc device: read operation has been called.
+[13379.084740] misc device: Deregistering the miscellaneous device.
+
+Commands (in order):
+	insmod misc_device.ko
+	echo "rcortes-" > /dev/fortytwo
+	echo -n "rcortes-" > /dev/fortytwo
+	cat /dev/fortytwo
+	rmmod misc_device
+	

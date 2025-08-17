@@ -10,30 +10,33 @@ MODULE_DESCRIPTION("Miscellaneous device assignment!");
 MODULE_VERSION("0.01");
 
 #define LOGIN_LEN 8
-static char data[LOGIN_LEN] = "rcortes-";
+static char data[LOGIN_LEN];
 
 
 static ssize_t read_operation(struct file *f, char __user *buff, size_t len, loff_t *ppos)
 {
-	size_t data_len = len < LOGIN_LEN ? len : LOGIN_LEN;
-	int status = copy_to_user(buff, data, data_len);
+	pr_info("misc device: read operation has been called.\n");
+	size_t data_len = len < LOGIN_LEN - *ppos ? len : LOGIN_LEN - *ppos;
+	int status = copy_to_user(buff, data + *ppos, data_len);
 	if (status) {
 		pr_err("misc device: Error copying data to user.\n");
-		return -1;
+		return -EFAULT;
 	}
+	*ppos += data_len;
 	return data_len;
 }
 
 static ssize_t write_operation(struct file *f, const char __user *buff, size_t len, loff_t *ppos)
 {
-	if (len != LOGIN_LEN || strcmp(buff, data) != 0) {
+	pr_info("misc device: write operation has been called.\n");
+	if (len != LOGIN_LEN || strncmp(buff, "rcortes-", len) != 0) {
 		pr_err("misc device: Invalid value\n");
-		return -1;
+		return -EINVAL;
 	}
 	int status = copy_from_user(data, buff, len);
 	if (status) {
 		pr_err("misc device: Error copying data from user.\n");
-		return -1;
+		return -EFAULT;
 	}	
 	return len;
 }
