@@ -17,7 +17,7 @@ static ssize_t read_operation(struct file *f, char __user *buff, size_t len, lof
 {
 	pr_info("misc device: read operation has been called.\n");
 	size_t data_len = len < LOGIN_LEN - *ppos ? len : LOGIN_LEN - *ppos;
-	int status = copy_to_user(buff, data + *ppos, data_len);
+	int status = copy_to_user(buff, "rcortes-" + *ppos, data_len);
 	if (status) {
 		pr_err("misc device: Error copying data to user.\n");
 		return -EFAULT;
