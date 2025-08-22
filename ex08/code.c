@@ -8,7 +8,7 @@
 /*
  * Don't have a license
  */
-MODULE_LICENSE("LICENSE");
+MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Louis Solofrizzo <louis@ne02ptzero.me>");
 MODULE_DESCRIPTION("Useless module");
 
@@ -37,37 +37,37 @@ static int __init myfd_init(void)
 	retval = misc_register(&myfd_device);
 	if (retval < 0)
 		return retval;
-	return 1;
+	return 0;
 }
 
 static void __exit myfd_cleanup(void)
 {
-	if (tmp)
+	if (tmp) {
+		pr_info("kvfree called in cleanup.\n");
 		kvfree(tmp);
+	}
 	misc_deregister(&myfd_device);
 }
 
 static ssize_t myfd_read(struct file *fp, char __user *user, size_t size, loff_t *offs)
 {
-	size_t t, i;
+	int t, i;
 	char *tmp2;
 	/*
 	 * Malloc like a boss
 	 */
 	tmp2 = kmalloc(sizeof(char) * PAGE_SIZE * 2, GFP_KERNEL);
 	if (!tmp2) {
-		pr_info("Error allocating memory with malloc\n");
+		pr_info("Error allocating memory with malloc.\n");
 		return -EFAULT;
 	}
 	if (tmp) {
-		//printk("tmp free in myfd_read\n");
+		printk("kvfree called in myfd_read.\n");
 		kvfree(tmp);
 	}
 	tmp = tmp2;
-	printk("str %s %ld\n", str, strlen(str));
 	for (t = strlen(str) - 1, i = 0; t >= 0; t--, i++)
 		tmp[i] = str[t];
-	return 0;
 	tmp[i] = 0x0;
 	return simple_read_from_buffer((void*)user, size, offs, tmp, i);
 }
@@ -75,9 +75,7 @@ static ssize_t myfd_read(struct file *fp, char __user *user, size_t size, loff_t
 static ssize_t myfd_write(struct file *fp, const char __user *user, size_t size, loff_t *offs)
 {
 	ssize_t res = 0;
-	printk("size %ld\n", size);
 	res = simple_write_to_buffer(str, size, offs, user, size);
-	printk("res %ld\n", res);
 	/*
 	 * 0x0 = '\0'
 	 */
