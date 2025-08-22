@@ -1,0 +1,17 @@
+[ 9014.564107] Init function called!
+[ 9035.828194] id debugfs: read operation has been called.
+[ 9035.830807] id debugfs: read operation has been called.
+[ 9045.133848] id debugfs: write operation has been called.
+[ 9045.133853] id debugfs: Invalid value
+[ 9047.886616] id debugfs: write operation has been called.
+[ 9056.604615] id debugfs: read operation has been called.
+[ 9056.607526] id debugfs: read operation has been called.
+[ 9061.551319] jiffies debugfs: read operation has been called.
+[ 9061.557194] jiffies debugfs: read operation has been called.
+[ 9072.155986] foo debugfs: write operation has been called.
+[ 9074.504969] foo debugfs: read operation has been called.
+[ 9074.508595] foo debugfs: read operation has been called.
+[ 9080.525640] foo debugfs: write operation has been called.
+[ 9082.546271] foo debugfs: read operation has been called.
+[ 9082.549731] foo debugfs: read operation has been called.
+[ 9091.327016] Cleaning up module.
