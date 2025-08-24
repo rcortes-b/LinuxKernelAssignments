@@ -19,28 +19,37 @@ MODULE_VERSION("0.01");
 
 static struct proc_dir_entry *proc_interface;
 
-static int mount_info_display(struct seq_file *m, void *v)
+static void mount_info_display(struct seq_file *m, struct mount *mnt)
+{
+	struct mount *child;
+	struct path path = {
+		.mnt = &mnt->mnt,
+		.dentry = mnt->mnt.mnt_root,
+	};
+	if (mnt != mnt->mnt_parent) {
+		seq_printf(m, "%s\t", mnt->mnt_devname);
+		seq_path(m, &path, " \t\n\\");
+		seq_putc(m, '\n');
+	}
+	list_for_each_entry(child, &mnt->mnt_mounts, mnt_child) {
+		mount_info_display(m, child);
+	}
+}
+
+static int mount_info_logic(struct seq_file *m, void *v)
 {
 	struct mnt_namespace *ns = current->nsproxy->mnt_ns;
-	struct mount *mnt;
-	struct mount *child;
 
 	if (ns->root)
-		mnt = ns->root;
+		mount_info_display(m, ns->root);
 	else
 		return 1;
-	int counter = 0;
-	list_for_each_entry(child, &mnt->mnt_mounts, mnt_child) {
-		seq_printf(m, "%s\t%s\n", child->mnt_mountpoint->d_name.name, child->mnt.mnt_sb->s_type->name);
-		mnt = child;
-		printk("Counter: %d\n", counter++);
-	};
 	return 0;
 }
 
 static int mount_info_open(struct inode *inode, struct file *f)
 {
-	return single_open(f, mount_info_display, NULL);
+	return single_open(f, mount_info_logic, NULL);
 }
 
 static const struct proc_ops fops = {
